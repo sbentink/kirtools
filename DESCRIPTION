@@ -1,11 +1,11 @@
 Package: kirtools
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Parsing and handling KIR genebank data
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Stefan Bentink
+Maintainer: Stefan Bentink <sbentink@web.de>
+Description: Allows to parse the IPDB data base with KIR genes and alleles in gene bank format, and makes it availble as R objects.
+License: Copyright: Stefan Bentink, 2016
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports:
