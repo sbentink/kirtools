@@ -10,6 +10,10 @@ LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports:
     XRPython,
-    hlatools
+    hlatools,
+    Biostrings,
+    IRanges,
+    GenomicRanges,
+    DECIPHER
 Collate:
     'kirallele.R'

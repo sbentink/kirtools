@@ -5,8 +5,8 @@
 \alias{KIRAllele-class}
 \title{Class \code{KIRAllele}}
 \description{
-{A wrapper extending \code{HLAAllele-class} imported from \code{hlatools}.
-No methods or attributes in addition to the ones inherrited from \code{HLAAllele} are implemented in this implementation.
-This class should allows to handle KIR alleles in a separate object.}
+A wrapper extending \linkS4class{HLAAllele} imported from \link{hlatools}
+No methods or attributes in addition to the ones inherrited from \linkS4class{HLAAllele} are implemented in this implementation.
+This class should allow to handle KIR alleles in a separate object.
 }
 
