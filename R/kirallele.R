@@ -177,7 +177,7 @@ setMethod(f="show", signature="KIRAlleleList",definition=function(object) {
   le  <- length(kil@alleles)
   lea <- sapply(kil@alleles,length)
 
-  cat("KIRAlleleList that contains", le, "KIR alleles\n")
+  cat("KIRAlleleList that contains", le, "KIR genes\n")
   cat("Alleles per gene:\n")
   print(lea)}
   )
@@ -206,11 +206,12 @@ KIRAlleleList_gb <- function(
   dbPath=file.path("extdata","2016_10_05_KIR.dat"),
   pythonPath="./exec",
   locusType="KIR") {
-  ka      <- new("KIRAlleleList")
-  my_db   <- PythonDB(dbPath,locusType,kirGene,pythonPath)
-  ka@alleles     <- getAllelesFromPython(my_db)
-  ka@data_source <- "genebank"
-  ka@data_name   <- sapply(strsplit(dbPath,.Platform$file.sep),function(x) x[length(x)])
+  ##ka      <- new("KIRAlleleList")
+  ##my_db   <- PythonDB(dbPath,locusType,kirGene,pythonPath)
+  ##ka@alleles     <- getAllelesFromPython(my_db)
+  ##ka@data_source <- "genebank"
+  ##ka@data_name   <- sapply(strsplit(dbPath,.Platform$file.sep),function(x) x[length(x)])
+  ka   <- getAllelesFromPython(PythonDB(dbPath,locusType,kirGene,pythonPath))
   ka
 }
 
@@ -236,6 +237,17 @@ calc_common_exon_distance <- function(x, selex = c("Exon 3","Exon 4","Exon 5"), 
                              restrict = -500, verbose = verbose)
   DECIPHER::DistanceMatrix(aln, includeTerminalGaps = TRUE, verbose = verbose)
 }
+
+get_feature_mat <- function(x) {
+  exmat.cols <- paste0(c("utr",rep(c("Exon ","Intron "),8),"Exon ","utr"),
+                       c(5,rep(1:8,each=2),9,3))
+  ms <- hlatools::sequences(x)
+  all.ranges <- hlatools::ranges(hlatools::features(x))
+  intex <- t(sapply(all.ranges,function(x) exmat.cols %in% names(x)))
+  intex
+}
+
+
 
 
 ##calc_common_exon_distance(k@alleles[[1]])
