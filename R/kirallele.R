@@ -226,6 +226,7 @@ KIRAlleleFromDB <- function(genename="KIR2DL1") {
   getKIRGene(KIRAlleleList_gb(kirGene = genename))
 }
 
+#' @export
 calc_common_exon_distance <- function(x, selex = c("Exon 3","Exon 4","Exon 5"), verbose = TRUE) {
   stopifnot(requireNamespace("DECIPHER", quietly = TRUE))
   ms <- hlatools::sequences(x)
