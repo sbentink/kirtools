@@ -1,10 +1,12 @@
 .onLoad <- function(libname, pkgname) {
-  kt_dbPath     <- file.path(system.file(package = pkgname), "extdata")
-  kt_dbName     <- "2016_10_05_KIR.dat"
-  kt_locusType  <- "KIR"
-  kt_pythonPath <- "exec"
-  options(kt_dbPath     = kt_dbPath,
+  kt_dbUrl      <- NA
+  kt_dbDate     <- NA
+  kt_dbPath     <- NA
+  kt_dbName     <- NA
+  kt_locusType  <- NA
+  options(kt_dbUrl      = kt_dbUrl,
+          kt_dbDate     = kt_dbDate,
+          kt_dbPath     = kt_dbPath,
           kt_dbName     = kt_dbName,
-          kt_locusType  = kt_locusType,
-          kt_pythonPath = kt_pythonPath)
+          kt_locusType  = kt_locusType)
 }

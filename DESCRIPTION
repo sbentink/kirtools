@@ -15,9 +15,11 @@ Imports:
     Biostrings,
     IRanges,
     GenomicRanges,
-    DECIPHER
+    DECIPHER,
+    RCurl
 Collate:
     'generics.R'
+    'ctrl_env.R'
     'python_db.R'
     'python_tools.R'
     'kir_allele_list.R'

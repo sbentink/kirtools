@@ -1,24 +1,31 @@
-#' @include generics.R
+#' @include ctrl_env.R
 #'
+
 setClass("PythonParams",
          slots =
-           list(dbPath     = "character",
+           list(dbUrl      = "character",
+                dbPath     = "character",
                 dbName     = "character",
-                locusType  = "character",
-                pythonPath = "character"))
+                dbDate     = "character",
+                locusType  = "character"))
 
 setMethod("initialize", "PythonParams",
           function(.Object,
+                   dbUrl      = getOption("kt_dbUrl"),
+                   dbDate     = getOption("kt_dbDate"),
                    dbPath     = getOption("kt_dbPath"),
                    dbName     = getOption("kt_dbName"),
                    ##The python scripts support more than one type of hla gene, that explains this option,
                    ##which is not really an option. Here it is all about kir.
-                   locusType  = getOption("kt_locusType"),
-                   pythonPath = getOption("kt_pythonPath")) {
-            .Object@dbPath     = dbPath
-            .Object@dbName     = dbName
-            .Object@locusType  = locusType
-            .Object@pythonPath = pythonPath
+                   locusType  = getOption("kt_locusType")) {
+            KIRSetPars(kt_dbDate    = dbDate,
+                       kt_dbPath    = dbPath,
+                       kt_dbName    = dbName)
+            .Object@dbUrl      = getOption("kt_dbUrl")
+            .Object@dbPath     = getOption("kt_dbPath")
+            .Object@dbName     = getOption("kt_dbName")
+            .Object@dbDate     = getOption("kt_dbDate")
+            .Object@locusType  = getOption("kt_locusType")
             .Object
 })
 
@@ -59,9 +66,8 @@ PythonDB <- function(gene, my_py_db = new("PythonDB")) {
   dbPath     <- my_py_db@dbPath
   dbName     <- my_py_db@dbName
   locusType  <- my_py_db@locusType
-  pythonPath <- my_py_db@pythonPath
   ev <- XRPython::RPython()
-  XRPython::pythonAddToPath(pythonPath, evaluator = ev)
+  XRPython::pythonAddToPath(evaluator = ev)
   ev$Import("hla_embl_parser", "read_dat_file_simple_locus", "read_dat_file_simple")
   myParseAll   <- XRPython::PythonFunction("read_dat_file_simple")
   myParseGene  <- XRPython::PythonFunction("read_dat_file_simple_locus")
